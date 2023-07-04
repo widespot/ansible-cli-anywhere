@@ -8,6 +8,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  LATEST_ANSIBLE_VERSION: "8"
+  LATEST_PYTHON_VERSION: "3.11"
 
 jobs:
   build-and-push-image:
@@ -20,6 +22,8 @@ jobs:
       matrix:
         ansible_version: [ "6", "7", "8" ]
         python_version: [ "3.8", "3.10", "3.11" ]
+        # Check version compatibility, starting from https://pypi.org/project/ansible/#history
+        # Hit an ansible version and make sure python version are listed in "Programming Language" section
         exclude:
           - ansible_version: "6"
             python_version: "3.11"
@@ -46,6 +50,8 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=semver,pattern={{version}}-${{matrix.ansible_version}}-py${{matrix.python_version}}
+          flavor: |
+            latest=${{ (matrix.ansible_version == env.LATEST_ANSIBLE_VERSION && matrix.python_version == env.LATEST_PYTHON_VERSION) && "true" || "false"}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
