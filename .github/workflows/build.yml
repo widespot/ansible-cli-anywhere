@@ -51,7 +51,7 @@ jobs:
           tags: |
             type=semver,pattern={{version}}-${{matrix.ansible_version}}-py${{matrix.python_version}}
           flavor: |
-            latest=${{ (matrix.ansible_version == env.LATEST_ANSIBLE_VERSION && matrix.python_version == env.LATEST_PYTHON_VERSION) && "true" || "false"}}
+            latest=${{ (matrix.ansible_version == env.LATEST_ANSIBLE_VERSION && matrix.python_version == env.LATEST_PYTHON_VERSION) && 'true' || 'false'}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
