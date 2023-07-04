@@ -51,6 +51,8 @@ jobs:
           tags: |
             type=semver,pattern={{raw}}-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
             type=semver,pattern=latest-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
+            type=semver,pattern=ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
+
           flavor: |
             latest=${{ (matrix.ansible_version == env.LATEST_ANSIBLE_VERSION && matrix.python_version == env.LATEST_PYTHON_VERSION) && 'true' || 'false'}}
 
