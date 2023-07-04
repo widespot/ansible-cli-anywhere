@@ -31,6 +31,13 @@ jobs:
             python_version: "3.8"
           - ansible_version: "8"
             python_version: "3.8"
+        include:
+          - ansible_version: "6"
+            latest_python_version: "3.10"
+          - ansible_version: "7"
+            latest_python_version: "3.11"
+          - ansible_version: "8"
+            latest_python_version: "3.11"
 
     steps:
       - name: Checkout repository
@@ -52,6 +59,7 @@ jobs:
             type=semver,pattern={{raw}}-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
             type=semver,pattern=latest-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
             type=semver,pattern=ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
+            ${{ matrix.python_version == matrix.latest_python_version && 'type=semver,pattern=ansible' + matrix.ansible_version || '' }}
 
           flavor: |
             latest=${{ (matrix.ansible_version == env.LATEST_ANSIBLE_VERSION && matrix.python_version == env.LATEST_PYTHON_VERSION) && 'true' || 'false'}}
