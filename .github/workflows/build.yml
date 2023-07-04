@@ -59,7 +59,7 @@ jobs:
             type=semver,pattern={{raw}}-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
             type=semver,pattern=latest-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
             type=semver,pattern=ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
-            ${{ (matrix.python_version == matrix.latest_python_version) && (join(('type=semver'), '+')) || '' }}
+            ${{ (matrix.python_version == matrix.latest_python_version) && (join(('type=semver', 'pattern='), '+')) || '' }}
 
           flavor: |
             latest=${{ (matrix.ansible_version == env.LATEST_ANSIBLE_VERSION && matrix.python_version == env.LATEST_PYTHON_VERSION) && 'true' || 'false'}}
