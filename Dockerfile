@@ -1,4 +1,5 @@
-FROM python:${PYTHON_VERSION:-3.8}-alpine
+ARG  PYTHON_VERSION=3.8
+FROM python:${PYTHON_VERSION}-alpine
 
 RUN apk update
 RUN apk add sshpass openssh docker git nano bash
