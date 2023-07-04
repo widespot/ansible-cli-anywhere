@@ -20,6 +20,9 @@ jobs:
       matrix:
         ansible_version: [ "6", "7", "8" ]
         python_version: [ "3.8", "3.10", "3.11" ]
+        exclude:
+          - ansible_version: "8.1.0"
+            python_version: "3.8"
 
     steps:
       - name: Checkout repository
