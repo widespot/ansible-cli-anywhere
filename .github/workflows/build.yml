@@ -52,7 +52,7 @@ jobs:
 
       - name: Build latest tag
         run: |
-          if [[ '${{matrix.python_version}}' -eq '${{matrix.latest_python_version}}' ]]; then
+          if [[ '${{matrix.python_version}}' == '${{matrix.latest_python_version}}' ]]; then
             echo "TAG_LATEST=\"type=semver,pattern=latest-ansible${{matrix.ansible_version}}\"" >> "$GITHUB_ENV"
           else
             echo "TAG_LATEST=''" >> "$GITHUB_ENV"
