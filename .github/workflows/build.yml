@@ -53,11 +53,14 @@ jobs:
       - name: Build latest tag
         run: |
           if [[ '${{matrix.python_version}}' == '${{matrix.latest_python_version}}' ]]; then
-            LATEST_TAG="type=semver,pattern=ansible${{matrix.ansible_version}}\n
-                        type=semver,pattern=latest-ansible${{matrix.ansible_version}}\n"
+            LATEST_TAG=$(cat << EOF
+            type=semver,pattern=ansible${{matrix.ansible_version}}
+            type=semver,pattern=latest-ansible${{matrix.ansible_version}}
+            EOF
+            )
             
             echo "LATEST_TAG<<EOF" >> "$GITHUB_ENV"
-            echo $LATEST_TAG >> "$GITHUB_ENV"
+            echo "$LATEST_TAG" >> "$GITHUB_ENV"
             echo "EOF" >> "$GITHUB_ENV"
           fi
 
