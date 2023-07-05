@@ -50,6 +50,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build latest tag
+        run: |
+          if [[ '${{matrix.python_version}}' -eq '${{matrix.latest_python_version}}' ]]; then
+            echo "TAG_LATEST=\"type=semver,pattern=latest-ansible${{matrix.ansible_version}}\"" >> "$GITHUB_ENV"
+          else
+            echo "TAG_LATEST=''" >> "$GITHUB_ENV"
+          fi
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
@@ -59,7 +67,7 @@ jobs:
             type=semver,pattern={{raw}}-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
             type=semver,pattern=latest-ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
             type=semver,pattern=ansible${{matrix.ansible_version}}-py${{matrix.python_version}}
-            ${{ (matrix.python_version == matrix.latest_python_version) && (join(('type=semver'\, 'pattern='), '+')) || '' }}
+            ${{ env.TAG_LATEST }}
 
           flavor: |
             latest=${{ (matrix.ansible_version == env.LATEST_ANSIBLE_VERSION && matrix.python_version == env.LATEST_PYTHON_VERSION) && 'true' || 'false'}}
