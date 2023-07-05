@@ -53,7 +53,7 @@ jobs:
       - name: Build latest tag
         run: |
           if [[ '${{matrix.python_version}}' == '${{matrix.latest_python_version}}' ]]; then
-            echo "TAG_LATEST=\"type=semver,pattern=latest-ansible${{matrix.ansible_version}}\ntype=semver,pattern=latest-ansible${{matrix.ansible_version}}\"" >> "$GITHUB_ENV"
+            echo "TAG_LATEST=\"type=semver,pattern=latest-ansible${{matrix.ansible_version}}\ntype=semver,pattern=ansible${{matrix.ansible_version}}\"" >> "$GITHUB_ENV"
           fi
 
       - name: Extract metadata (tags, labels) for Docker
