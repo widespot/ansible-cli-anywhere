@@ -11,6 +11,8 @@ docker exec -it ansible-cli /bin/bash
 ```
 
 ## Available tags
-* `latest`
-* `latest-ansibleXXX-pyYYY` (or `ansibleXXX-pyYYY`)
 * `vMAJ.MIN.BUILD-ansibleXXX-pyYYY`
+* `vMAJ.MIN.BUILD-ansibleXXX`
+* `latest-ansibleXXX-pyYYY` (or `ansibleXXX-pyYYY`)
+* `latest-ansibleXXX` (or `ansibleXXX`)
+* `latest`
