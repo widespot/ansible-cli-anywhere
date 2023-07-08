@@ -16,12 +16,17 @@ This image provides support for proxy internet connection.
 3. Start the container and provide the proxy credentials
 
 ```shell
+# Run the container, with PROXY_SECURE_HOST env
 docker run -dt --name ansible-cli \
   -e PROXY_SECURE_HOST=my-proxy.local:8081 \
   ghcr.io/widespot/ansible-cli-anywhere
+# Enter the container
 docker exec -it ansible-cli /bin/bash
+# You'll be requested to provide username (if not yet provided in env)
+# and password
 > PROXY_SECURE_USERNAME=<enter-your-proxy-username>
 > PROXY_SECURE_PASSWORD=<enter-your-proxy-password>
+# Now you can wget via proxy
 > wget https://www.widespot.be
 ```
 
