@@ -9,6 +9,18 @@ docker exec -it ansible-cli /bin/bash
 > ansible --version
 ```
 
+## Image versions
+This image is designed to provide isolated environment for various Ansible + Python versions.
+See the "Available tags" version.
+
+| Ansible version | Ansible core version | python 3.8    | python 3.10 | python 3.11   |
+|-----------------|----------------------|---------------|-------------|---------------|
+| `8`             | `2.15`               | Not available | ✅           | ✅             |
+| `7`             | `2.14`               | Not available | ✅           | ✅             |
+| `6`             | `2.13`               | ✅             | ✅           | Not available |
+
+*More information on the Ansible ["Release and maintenante" page](https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-community-changelogs)*
+
 ## Proxy
 This image provides support for proxy internet connection.
 1. set `PROXY_SECURE_HOST` environment variable
