@@ -3,8 +3,12 @@ FROM python:${PYTHON_VERSION}-alpine
 
 ARG  ANSIBLE_VERSION=8
 
-RUN apk update
-RUN apk add sshpass openssh docker git nano bash
-RUN apk add --no-cache musl-dev libffi-dev openssl-dev make gcc python3-dev
-RUN pip install cffi
+# When running pip install ansible, without this line:
+# ERROR: Could not build wheels for cffi, which is required to install pyproject.toml-based projects
+RUN apk add --update --no-cache musl-dev libffi-dev gcc \
+  && pip install cffi \
+  && apk del musl-dev libffi-dev gcc
+
 RUN pip install ansible==$ANSIBLE_VERSION
+
+RUN apk add --update --no-cache sshpass openssl openssh docker git nano bash
