@@ -11,4 +11,6 @@ RUN apk add --update --no-cache musl-dev libffi-dev gcc \
 
 RUN pip install ansible==$ANSIBLE_VERSION
 
+COPY bashrc /etc/bash/setup_proxy.sh
+
 RUN apk add --update --no-cache sshpass openssl openssh docker git nano bash
